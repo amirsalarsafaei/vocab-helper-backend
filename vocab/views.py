@@ -47,7 +47,7 @@ class SpellingAPIView(APIView):
         if not random_word.audio_url:
             audio_url = await get_pronounce(random_word.word, random_word.id)
             random_word.audio_url = audio_url
-            random_word.asave()
+            await random_word.asave()
         else:
             audio_url = random_word.audio_url
 

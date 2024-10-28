@@ -24,15 +24,18 @@ OPEN_AI_BASE_URL = os.environ.get("OPEN_AI_BASE_URL", "")
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p4@gw6g!arw67&g^pbxe@)n6w8s(ri8puqx-v-s#54f)$^zx-s'
+SECRET_KEY = os.environ.get("SECRET_KEY", 'django-insecure-p4@gw6g!arw67&g^pbxe@)n6w8s(ri8puqx-v-s#54f)$^zx-s')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", True)
+if type(DEBUG) == str:
+    if DEBUG.lower() == "false":
+        DEBUG = False
+    else:
+        DEBUG = True
 
 ALLOWED_HOSTS = ['localhost:5173',  'english.amirsalarsafaei.com', 'localhost']
-LOGIN_REDIRECT_URL = '/users/login/'
-LOGIN_URL = '/users/login/'
-UPLOAD_URL = 'http://0.0.0.0:8002'
+UPLOAD_URL = os.environ.get("UPLOAD_URL", 'http://localhost:8002')
 
 # Application definition
 
@@ -126,7 +129,7 @@ USE_I18N = True
 
 USE_TZ = True
 CSRF_TRUSTED_ORIGINS = [
-        'http://localhost:5173', 'http://127.0.0.1:5173']
+        'http://localhost:5173', 'http://127.0.0.1:5173', "https://english.amirsalarsafaei.com"]
 CSRF_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS
 CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS
 CORS_ALLOW_CREDENTIALS = True

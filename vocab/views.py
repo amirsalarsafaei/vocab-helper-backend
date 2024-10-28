@@ -81,6 +81,8 @@ class SpellingAPIView(APIView):
                 correct_word.last_successive_successes += 0
                 correct_word.total_fails += 1
 
+            await correct_word.asave()
+
             return Response({
                 "is_correct": is_correct,
                 "correct_word": correct_word.word,
@@ -137,6 +139,8 @@ class PracticeAPIView(APIView):
             else:
                 correct_word.last_successive_successes += 0
                 correct_word.total_fails += 1
+
+            await correct_word.asave()
 
             return Response({
                 "is_correct": is_correct,

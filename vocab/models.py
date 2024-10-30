@@ -24,6 +24,5 @@ class Vocab(models.Model):
     
 
     def incorrect_answer(self):
-        self.last_answered = now()
         self.total_fails += 1
         self.last_successive_successes = 0
